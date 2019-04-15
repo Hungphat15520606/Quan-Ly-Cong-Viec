@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 
 
+
+
 class Sort extends Component {
    
+    reverseItem=()=>{
+        this.props.onsortItem();
+        this.props.danhSach.reverse()
+    } 
+
   render() {
     const {onsortItem}= this.props
     return (
@@ -13,14 +20,14 @@ class Sort extends Component {
                 </button>
                 <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
                     <li>
-                        <a href="##" role="button" onClick={()=>onsortItem()}>
+                        <a href="##" role="button" onClick={onsortItem}>
                                     <span className="fa fa-sort-alpha-asc pr-5">
                                          Tên A-Z
                                     </span>
                                 </a>
                     </li>
                     <li>
-                        <a  href="##" role="button">
+                        <a  href="##" role="button" onClick={this.reverseItem}>
                                     <span className="fa fa-sort-alpha-desc pr-5">
                                          Tên Z-A
                                     </span>

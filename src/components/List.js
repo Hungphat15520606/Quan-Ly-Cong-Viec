@@ -5,13 +5,13 @@ export default class List extends Component {
   constructor(props){
     super(props);
       this.state={
-        
+      
     }
   }
 
 
   render() {
-    const {onremoveItem, ongetFilterMode,ontoggleStatus} = this.props
+    const {onremoveItem, ongetFilterMode,ontoggleStatus, filterName, onchangeFilterName,onUpdate,filterMode,onchangeFilterMode} = this.props
     return (
       <div>
         <table className="table table-bordered table-hover">
@@ -27,10 +27,10 @@ export default class List extends Component {
                 <tr>
                     <td></td>
                     <td>
-                        <input type="text" className="form-control" />
+                        <input type="text" className="form-control" value={filterName} onChange={(evt)=>{onchangeFilterName(evt.target.value)}}/>
                     </td>
                     <td>
-                        <select className="form-control" value={this.props.filterMode} onChange={(evt)=>{this.props.onchageFilterMode(evt.target.value)}}>
+                        <select className="form-control" value={filterMode} onChange={(evt)=>{onchangeFilterMode(evt.target.value)}}>
                             <option value="TAT_CA">Tất Cả</option>
                             <option value="KICH_HOAT">Ẩn</option>
                             <option value="AN">Kích Hoạt</option>
@@ -44,7 +44,7 @@ export default class List extends Component {
                                                         index={index} 
                                                         onremoveItem={onremoveItem}
                                                         ontoggleStatus={ontoggleStatus}
-                                                        onUpdate={this.props.onUpdate}// truyền componennt từ Item sang List
+                                                        onUpdate={onUpdate}// truyền componennt từ Item sang List
                                                         />)}
 
             </tbody>

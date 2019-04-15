@@ -5,10 +5,15 @@ import Sort from './Sort'
 
 class Control extends Component {
   render() {
+    const {onsearchItem,keyWords,onsortItem,danhSach, onchangeSearch}=this.props
     return (  
         <div>
-            <Search/>
-            <Sort onsortItem={this.props.onsortItem}/>
+            <Search   onsearchItem={onsearchItem}
+                      keyWords={keyWords}
+                      onchangeSearch={onchangeSearch}/>
+            <Sort onsortItem={onsortItem} 
+                  danhSach={danhSach}
+                  />
         </div>
       );
     } 

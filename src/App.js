@@ -16,7 +16,7 @@ const DanhSach=[
     },
     {
       id:'s3',
-      Name: "Đi xem phim",
+      Name: "A cơm",
       Status:true
     }
   ]
@@ -32,16 +32,21 @@ class App extends Component {
             //updateItem:{id:"", STT:null, Name: "", Status: Boolean},
             updateItem:null,
             //status:false,
-            txtName:''
+            txtName:'',
+            filterName:'',
+            keyWords:''
         }
         this.onaddItem=this.onaddItem.bind(this);
         this.onremoveItem=this.onremoveItem.bind(this);
-        this.onchageFilterMode=this.onchageFilterMode.bind(this)
+        this.onchangeFilterMode=this.onchangeFilterMode.bind(this)
         this.ongetFilterMode=this.ongetFilterMode.bind(this)
         this.onsortItem=this.onsortItem.bind(this)
         this.ontoggleStatus=this.ontoggleStatus.bind(this)
         this.onUpdate=this.onUpdate.bind(this)
         this.onToggleForm=this.onToggleForm.bind(this)
+        this.onchangeFilterName=this.onchangeFilterName.bind(this)
+        this.onsearchItem=this.onsearchItem.bind(this)
+        this.onchangeSearch=this.onchangeSearch.bind(this)
     }
 
     onToggleForm(){
@@ -61,26 +66,51 @@ class App extends Component {
         this.setState({danhSach:newItems})
     }
 
-    onchageFilterMode(filterMode){
+    onchangeFilterMode(filterMode){
         this.setState({filterMode})
     }
 
+    onchangeFilterName(filterName){
+        this.setState({filterName})
+    }
+
+    onchangeSearch(keyWords){
+        this.setState({keyWords})
+    }
+
+    onsearchItem(){
+        const {keyWords} = this.state
+        console.log(keyWords)
+        const newItems = this.state.danhSach.filter((item)=>{
+            if (keyWords) return  item.Name.toLowerCase().indexOf(keyWords) !== -1;       
+            return true 
+        })
+        if(keyWords) return this.setState({danhSach:newItems})
+        else return this.setState({danhSach:DanhSach})
+        //return this.setState({danhSach:newItems})
+    }
 
     ongetFilterMode(){
-        const {filterMode, danhSach}=this.state;
+        const {filterMode, danhSach, filterName}=this.state;
         const newItems = danhSach.filter((item)=>{
         if(filterMode==="KICH_HOAT"&&item.Status) return false;
-        if(filterMode==="AN"&&!item.Status) return false 
+        if(filterMode==="AN"&&!item.Status) return false
+        if(filterName) return  item.Name.toLowerCase().indexOf(filterName) !== -1; 
         return true   
         })
         return newItems
     }
 
     onsortItem(){
-        const newItems= this.state.danhSach.sort()
-        this.setState({danhSach:newItems})
-        console.log(newItems)
+        const newItems= this.state.danhSach.sort((a, b)=>{
+            if (a.Name.toLowerCase() < b.Name.toLowerCase()) {return -1;}
+            if (a.Name.toLowerCase() > b.Name.toLowerCase()) {return 1;}
+            return 0;
+        });
+        console.log(this.state.danhSach)
+        return this.setState({danhSach:newItems})    
     }
+
     ontoggleStatus(id){
         const newItems = this.state.danhSach.map((item)=>{
             if (id!==item.id) return item
@@ -133,16 +163,23 @@ class App extends Component {
                   <span className="fa fa-plus mr-5"></span>Thêm Công Việc
               </button>
               <div className="row mt-15">
-                  <Control onsortItem={this.onsortItem}/>
+                  <Control  onsortItem={this.onsortItem} 
+                            danhSach={this.state.danhSach}
+                            onsearchItem={this.onsearchItem}
+                            keyWords={this.state.keyWords}
+                            onchangeSearch={this.onchangeSearch}
+                            />
               </div>
               <div className="row mt-15">
                   <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                       <List     danhSach={this.state.danhSach} 
                                 onremoveItem={this.onremoveItem} 
-                                onchageFilterMode={this.onchageFilterMode} 
+                                onchangeFilterMode={this.onchangeFilterMode} 
                                 ongetFilterMode={this.ongetFilterMode}
                                 ontoggleStatus={this.ontoggleStatus}
-                                onUpdate={this.onUpdate}/// props được nhận từ 
+                                onUpdate={this.onUpdate}
+                                filterName={this.state.filterName}
+                                onchangeFilterName={this.onchangeFilterName}/// props được nhận từ 
                                 />
                   </div>
               </div>
