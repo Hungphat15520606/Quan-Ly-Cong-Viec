@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Form from "./Form";
 import Control from "./control/Control";
 import List from "./List";
-import  Root  from "../Root";
+import Root from "../Root";
 
 const DanhSach = [
   {
@@ -22,7 +22,7 @@ const DanhSach = [
   }
 ];
 
-  export class Main extends Component {
+export class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -147,9 +147,8 @@ const DanhSach = [
 
   render() {
     const { shouldShowForm } = this.state;
-    return (     
+    return (
       <div className="container">
-      <Root/>
         <div className="text-center">
           <h1>Quản Lý Công Việc</h1>
           <hr />
@@ -183,7 +182,8 @@ const DanhSach = [
               style={{ marginBottom: 10 }}
               onClick={this.onToggleForm}
             >
-              <span className="fa fa-plus mr-5" />Thêm Công Việc
+              <span className="fa fa-plus mr-5" />
+              Thêm Công Việc
             </button>
             <div className="row mt-15">
               <Control
@@ -217,4 +217,4 @@ const DanhSach = [
   }
 }
 
-export default Form;
+export default Main;
