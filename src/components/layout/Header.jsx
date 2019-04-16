@@ -16,8 +16,10 @@ export class Header extends Component {
               <Link to="/quan-ly-cong-viec">Quản lý công việc</Link>
             </li>
             <li>
-              {" "}
-              <Link to="/lien-he">Liên hệ</Link>
+              <Link to="/contact">Liên hệ</Link>
+            </li>
+            <li>
+              <Link to="/about">Về chúng tôi</Link>
             </li>
           </ul>
         </div>

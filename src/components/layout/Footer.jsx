@@ -3,9 +3,12 @@ import React, { Component } from "react";
 export class Footer extends Component {
   render() {
     return (
-      <div className="pannel">
-        Hi
-      </div>
+      <footer class="container-fluid bg-4 text-center">
+        <p>
+          ALL RIGHT SERVED 2019{" "}
+          <a href="#!">Github.com</a>
+        </p>
+      </footer>
     );
   }
 }
