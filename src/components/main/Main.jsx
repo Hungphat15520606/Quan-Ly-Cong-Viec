@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import Form from "./components/home/Form";
-import Control from "./components/home/control/Control";
-import List from "./components/home/List";
-import { Root } from "./components/Root";
+import Form from "./Form";
+import Control from "./control/Control";
+import List from "./List";
+import  Root  from "../Root";
 
 const DanhSach = [
   {
@@ -22,7 +22,7 @@ const DanhSach = [
   }
 ];
 
-class App1 extends Component {
+  export class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -147,8 +147,7 @@ class App1 extends Component {
 
   render() {
     const { shouldShowForm } = this.state;
-    return (
-        
+    return (     
       <div className="container">
       <Root/>
         <div className="text-center">
@@ -218,4 +217,4 @@ class App1 extends Component {
   }
 }
 
-export default App1;
+export default Form;
