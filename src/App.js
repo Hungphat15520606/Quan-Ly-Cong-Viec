@@ -34,18 +34,19 @@ class App extends Component {
             //status:false,
             txtName:'',
             filterName:'',
-            keyWords:''
+            keyWords:'',
+           
         }
         this.onaddItem=this.onaddItem.bind(this);
         this.onremoveItem=this.onremoveItem.bind(this);
-        this.onchangeFilterMode=this.onchangeFilterMode.bind(this)
-        this.ongetFilterMode=this.ongetFilterMode.bind(this)
+        this.onchangeFilter=this.onchangeFilter.bind(this)
+        this.ongetFilter=this.ongetFilter.bind(this)
         this.onsortItem=this.onsortItem.bind(this)
         this.ontoggleStatus=this.ontoggleStatus.bind(this)
         this.onUpdate=this.onUpdate.bind(this)
         this.onToggleForm=this.onToggleForm.bind(this)
         this.onchangeFilterName=this.onchangeFilterName.bind(this)
-        this.onsearchItem=this.onsearchItem.bind(this)
+        //this.onsearchItem=this.onsearchItem.bind(this)
         this.onchangeSearch=this.onchangeSearch.bind(this)
     }
 
@@ -66,7 +67,7 @@ class App extends Component {
         this.setState({danhSach:newItems})
     }
 
-    onchangeFilterMode(filterMode){
+    onchangeFilter(filterMode){
         this.setState({filterMode})
     }
 
@@ -78,24 +79,24 @@ class App extends Component {
         this.setState({keyWords})
     }
 
-    onsearchItem(){
-        const {keyWords} = this.state
-        console.log(keyWords)
-        const newItems = this.state.danhSach.filter((item)=>{
-            if (keyWords) return  item.Name.toLowerCase().indexOf(keyWords) !== -1;       
-            return true 
-        })
-        if(keyWords) return this.setState({danhSach:newItems})
-        else return this.setState({danhSach:DanhSach})
-        //return this.setState({danhSach:newItems})
-    }
+    // onsearchItem(){  
+    //     const {keyWords} = this.state
+    //     console.log(keyWords)
+    //     const newItems = this.state.danhSach.filter((item)=>{
+    //         if (keyWords) return  item.Name.toLowerCase().indexOf(keyWords) !== -1;
+    //         return true        
+    //     })
+    //     console.log(newItems)
+    //     return this.setState({danhSach:newItems})
+    // }
 
-    ongetFilterMode(){
-        const {filterMode, danhSach, filterName}=this.state;
+    ongetFilter(){
+        const {filterMode, danhSach, filterName, keyWords}=this.state;
         const newItems = danhSach.filter((item)=>{
         if(filterMode==="KICH_HOAT"&&item.Status) return false;
         if(filterMode==="AN"&&!item.Status) return false
         if(filterName) return  item.Name.toLowerCase().indexOf(filterName) !== -1; 
+        if (keyWords) return  item.Name.toLowerCase().indexOf(keyWords) !== -1;
         return true   
         })
         return newItems
@@ -153,7 +154,9 @@ class App extends Component {
                                     update={this.state.update}
                                     updateItem={this.state.updateItem}
                                     danhSach={this.state.danhSach}
-                                    onUpdate={this.onUpdate}/>
+                                    onUpdate={this.onUpdate}
+                                    ongetFilter={this.ongetFilter}
+                                    />
                                     :null
                                 }             
           </div>
@@ -174,12 +177,14 @@ class App extends Component {
                   <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                       <List     danhSach={this.state.danhSach} 
                                 onremoveItem={this.onremoveItem} 
-                                onchangeFilterMode={this.onchangeFilterMode} 
-                                ongetFilterMode={this.ongetFilterMode}
+                                onchangeFilter={this.onchangeFilter} 
+                                ongetFilter={this.ongetFilter}
                                 ontoggleStatus={this.ontoggleStatus}
-                                onUpdate={this.onUpdate}
+                                onUpdate={this.onUpdate}   /// props được nhận từ
                                 filterName={this.state.filterName}
-                                onchangeFilterName={this.onchangeFilterName}/// props được nhận từ 
+                                onchangeFilterName={this.onchangeFilterName}
+                                onsearchItem={this.onsearchItem}
+                                isSearch={this.state.isSearch}
                                 />
                   </div>
               </div>

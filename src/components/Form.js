@@ -5,7 +5,7 @@ class Form extends Component {
         super(props);
         this.state={
             txtName: this.props.update? this.props.updateItem.Name:'',
-            status:this.props.update? this.props.updateItem.Status: 0,
+            status: this.props.update? (this.props.updateItem.Status===true?1:0): 0,
         }
     }
 
@@ -31,6 +31,7 @@ class Form extends Component {
         event.preventDefault();
         const {txtName, status}= this.state;
         const {onUpdate,updateItem} = this.props
+       // console.log(updateItem.Status)
         const newItem={
             id: updateItem.id,
             Name : txtName,

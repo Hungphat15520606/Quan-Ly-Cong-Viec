@@ -2,16 +2,8 @@ import React, { Component } from 'react'
 import Item from './Item'
 
 export default class List extends Component {
-  constructor(props){
-    super(props);
-      this.state={
-      
-    }
-  }
-
-
   render() {
-    const {onremoveItem, ongetFilterMode,ontoggleStatus, filterName, onchangeFilterName,onUpdate,filterMode,onchangeFilterMode} = this.props
+    const {onremoveItem, ongetFilter,ontoggleStatus, filterName, onchangeFilterName,onUpdate,filterMode,onchangeFilter} = this.props
     return (
       <div>
         <table className="table table-bordered table-hover">
@@ -30,7 +22,7 @@ export default class List extends Component {
                         <input type="text" className="form-control" value={filterName} onChange={(evt)=>{onchangeFilterName(evt.target.value)}}/>
                     </td>
                     <td>
-                        <select className="form-control" value={filterMode} onChange={(evt)=>{onchangeFilterMode(evt.target.value)}}>
+                        <select className="form-control" value={filterMode} onChange={(evt)=>{onchangeFilter(evt.target.value)}}>
                             <option value="TAT_CA">Tất Cả</option>
                             <option value="KICH_HOAT">Ẩn</option>
                             <option value="AN">Kích Hoạt</option>
@@ -39,7 +31,8 @@ export default class List extends Component {
                     <td></td>
                 </tr>
 {/* ----------gọi hàm map để render các item trong mảng ----------   */}
-            {ongetFilterMode().map((item, index)=><Item item={item} 
+
+            {ongetFilter().map((item, index)=><Item item={item} 
                                                         key={item.id} 
                                                         index={index} 
                                                         onremoveItem={onremoveItem}
