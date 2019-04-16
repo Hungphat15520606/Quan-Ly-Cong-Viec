@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Form from './components/Form'
-import Control from './components/Control'
-import List from './components/List'
+import Form from './components/home/Form'
+import Control from './components/home/control/Control'
+import List from './components/home/List'
 
 const DanhSach=[
     {
