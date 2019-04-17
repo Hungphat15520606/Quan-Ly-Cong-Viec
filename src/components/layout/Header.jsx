@@ -8,7 +8,7 @@ export class Header extends Component {
         <div className="container">
           <ul className="nav navbar-nav">
             <li className="active">
-              <Link exact to="/">
+              <Link to="/">
                 Trang chủ
               </Link>
             </li>

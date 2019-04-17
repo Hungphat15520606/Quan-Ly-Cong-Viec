@@ -20,7 +20,7 @@ export class Form extends Component {
     const newItem = {
       id: Math.random() + "",
       Name: txtName,
-      Status: status == 1 ? true : false
+      Status: status === 1 ? true : false
     };
     onaddItem(newItem);
     //this.setState({name:''})
@@ -39,7 +39,7 @@ export class Form extends Component {
     const newItem = {
       id: updateItem.id,
       Name: txtName,
-      Status: status == 1 ? true : false
+      Status: status === 1 ? true : false
     };
     //   console.log(newItem)
     onUpdate(updateItem.id, newItem);
